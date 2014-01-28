@@ -1,0 +1,634 @@
+$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+
+@import 'sass-bootstrap/lib/bootstrap';
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/*********************** PLS MIXINS ***********************/
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+       -o-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin box-shadow($hor, $ver, $blur, $color) {
+  -webkit-box-shadow: $hor $ver $blur $color;
+     -moz-box-shadow: $hor $ver $blur $color;
+      -ms-box-shadow: $hor $ver $blur $color;
+       -o-box-shadow: $hor $ver $blur $color;
+          box-shadow: $hor $ver $blur $color;
+}
+
+@mixin transition($el, $time, $ease:"") {
+  -webkit-transition: $el $time #{$ease};
+     -moz-transition: $el $time #{$ease};
+      -ms-transition: $el $time #{$ease};
+       -o-transition: $el $time #{$ease};
+          transition: $el $time #{$ease};
+}
+
+@mixin translate($hor, $ver) {
+    transform: translate( $hor, $ver );
+    -webkit-transform: translate( $hor, $ver );
+    -moz-transform: translate( $hor, $ver );
+    -o-transform: translate( $hor, $ver );
+    -ms-transform: translate( $hor, $ver );
+}
+
+/*********************** PLS GLOBAL ***********************/
+
+body {
+    font-family: 'Proxima Nova';
+    font-size: 20px;
+    color: #fff;
+    overflow: hidden;
+}
+
+ul:not(.pls-info-list) {
+    padding: 0px;
+    margin: none;
+    list-style: none;
+}
+
+a {
+    &:hover {
+      text-decoration: none;
+  
+    }
+}
+
+.pls-container {
+    position: absolute;
+    background: url("../images/bg.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-position: 0px 0px;
+}
+
+.pls-container-overlay {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.pls-container-inner {
+    position: absolute;
+    padding: 25px 50px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+header.pls-header {
+    span.pls-slogan {
+        margin-right: 30px;
+    }
+}
+
+.pls-intro-text {
+    position: relative;
+    top:20%;
+    -webkit-animation-delay: 0.5s;
+    -webkit-animation: slideInText 1.5s  ease-in-out;
+    -moz-animation: slideInText 1.5s  ease-in-out;
+    -o-animation: slideInText 1.5s  ease-in-out;
+    animation: slideInText 1.5s  ease-in-out;
+
+    p {
+        font-size: 50px;
+        margin-bottom: 50px;
+        color: (255,255,255,0.8);
+    }
+
+    span.pls-slogan {
+        margin-right: 20px;
+    }
+}
+
+@-webkit-keyframes slideInText {
+    from { opacity:0.1; -webkit-transform: translate(0px, -30px); }
+    to { opacity:1; -webkit-transform:  translate(0px, 0px); }
+}
+@-moz-keyframes slideInText {
+    from { opacity:0.1; -moz-transform: translate(0px, -30px); }
+    to { opacity:1; -moz-transform:  translate(0px, 0px); }
+}
+@-o-keyframes slideInText {
+    from { opacity:0.1; -o-transform: translate(0px, -30px); }
+    to { opacity:1; -o-transform:  translate(0px, 0px); }
+}
+slideInText {
+    from { opacity:0.1; transform: translate(0px, -30px); }
+    to { opacity:1; transform:  translate(0px, 0px); }
+}
+
+.pls-counter {
+    position: relative;
+    .pls-inc {
+        font-size: 25px;
+        color: #585593;
+        margin-right: 5px;
+        &.pls-active {
+            color: #fff;
+            @include transition(color, 0.5s, ease-in);
+        }
+    }
+}
+
+.pls-footer {
+    position:absolute;
+    bottom: 25px;
+    nav.pls-footer-nav {
+        ul {
+
+            li.pls-footer-static-link {
+                display: inline;
+                position: relative;
+                margin-right: 10px;
+                font-size: 13px;
+                color: rgba(255,255,255,0.7);
+            }
+
+            li.pls-footer-animated-link {
+                display: inline;
+                position: relative;
+                a {
+                    color: rgba(255,255,255,0.7);
+                    padding: 10px;
+                    font-size: 13px;
+                    text-shadow: none;
+                    &:hover{
+                        color: rgba(255,255,255,1);
+                    }
+                    &::before,
+                    &::after {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 100%;
+                        height: 1px;
+                        background: rgba(255,255,255,0.7);
+                        content: '';
+                        -webkit-transition: -webkit-transform 0.3s;
+                        -moz-transition: -moz-transform 0.3s;
+                        transition: transform 0.3s;
+                        -webkit-transform: scale(0.85);
+                        -moz-transform: scale(0.85);
+                        transform: scale(0.85);
+                    }
+                    &::after {
+                        opacity: 0;
+                        -webkit-transition: top 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+                        -moz-transition: top 0.3s, opacity 0.3s, -moz-transform 0.3s;
+                        transition: top 0.3s, opacity 0.3s, transform 0.3s;
+                    }
+                    &:hover::before,
+                    &:hover::after,
+                    &:focus::before,
+                    &:focus::after {
+                        background: rgba(255,255,255,1);
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                    }
+                    &:hover::after,
+                    &:focus::after {
+                        top: 0%;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*********************** PLS SLIDE ***********************/
+
+.pls-slides {
+    width: 600px;
+    height: 235px;
+    overflow: hidden;
+    position: absolute;
+    top: 35%;
+    left: 12.5%;
+}
+
+ul.pls-slide-inner {
+    position: relative;
+    width: 2400px;
+    li.pls-slide-item {
+        float: left;
+        width: 600px;
+        height: 235px;
+    }
+}
+
+.pls-text {
+    line-height: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.pls-slideOut {
+    @include translate(-600px, 0px);
+    -webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+}
+
+.pls-hide {
+    display: none;
+}
+
+.pls-alert {
+    font-size: 14px;
+    background: rgba(180, 24, 24, 0.64);
+    color: #fff;
+    border: none;
+    width: 94%;
+}
+
+.pls-bold {
+    font-weight: 800;
+}
+
+.pls-textbox {
+    border: none;
+    background: rgba(255,255,255,0.7);
+    padding: 10px;
+    color: #2d232c;
+    outline: none;
+    box-shadow: none;
+    margin-bottom: 20px;
+    @include border-radius(5px);
+
+    &::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #9d939f;
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color:    #9d939f;
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color:    #9d939f;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color:    #9d939f;
+    }
+}
+
+.pls-contact-form-input {
+    float: left;
+    clear: both;
+}
+
+/*********************** PLS BUTTON ***********************/
+
+.pls-button {
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    @include border-radius(5px);
+    color: #fff;
+    @include transition(all, 0.3s, ease-out);
+    &:hover {
+        @include transition(all, 0.3s, ease-in);
+    }
+
+    &.pls-button-nice {
+        background: rgba(24, 233, 241, 0.7);
+        span.glyph-glass {
+            font-size: 18px;
+            margin-left: 5px;
+            color: rgba(255,255,255,0.7);
+
+            @include transition(all, 0.3s, ease-out);
+
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+
+        }
+        &:hover {
+            span.glyph-glass {
+                -webkit-transform: rotate(20deg);
+                -moz-transform: rotate(20deg);
+                -o-transform: rotate(20deg);
+                transform: rotate(20deg);
+
+                @include transition(all, 0.3s, ease-in);
+                text-shadow: 0px 0px 5px white;
+
+            }
+        }
+    }
+    &.pls-button-sign-up {
+        background: rgba(117,14,57,0.7);
+        &:hover {
+            background: rgba(0,118,163,0.7);
+        }
+    }
+    &.pls-button-twitter,
+    &.pls-button-demo-app {
+        background: rgba(19,220,244,0.7);
+        &:hover {
+            background: rgba(117,14,57,0.7);
+        }
+        a {
+            line-height: inherit;
+        }
+    }
+    &.pls-button-demo-app {
+        float: right;
+        position: relative;
+        z-index: 1000000;
+    }
+    &.pls-button-facebook {
+        background: rgba(0,118,163,0.7);
+        &:hover {
+            background: rgba(117,14,57,0.7);
+        }
+        a {
+            line-height: inherit;
+        }
+    }
+    &.pls-button-username {
+        background: rgba(145,223,152,0.7);
+        &:hover {
+            background: rgba(117,14,57,0.7);
+        }
+    }
+    &.pls-button-mob-nav {
+        background: rgba(19,220,244,0.7);
+        &:hover {
+            background: rgba(19,220,244,0.5);
+        }
+    }
+}
+
+span.pls-or {
+    margin: 0px 15px;
+}
+
+/*********************** PLS IPHONE ***********************/
+
+.pls-iphone {
+    background: url("../images/iphone.png");
+    background-size: 312.5px 652.5px;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 312.5px;
+    height: 652.5px;
+    z-index: 1;
+    right: 50px;
+    top: 3%;
+}
+
+.pls-iphone-slide-in {
+    @include transition(opacity, 0.1s, ease-in);
+    -webkit-animation: cssAnimation 1.0s  ease-in;
+    -moz-animation: cssAnimation 1.0s  ease-in;
+    -o-animation: cssAnimation 1.0s  ease-in;
+    animation: cssAnimation 1.0s  ease-in;
+}
+
+@-webkit-keyframes cssAnimation {
+    from { opacity: 0; -webkit-transform:  translate(0px, 50px); }
+    to { opacity: 1; -webkit-transform:  translate(0px, 0px); }
+}
+
+@-moz-keyframes cssAnimation {
+    from { -moz-transform: translate(0px, 50px); }
+    to { -moz-transform: translate(0px, 0px); }
+}
+@-o-keyframes cssAnimation {
+    from { -o-transform: translate(0px, 50px); }
+    to { -o-transform: translate(0px, 0px); }
+}
+
+cssAnimation {
+    from { transform: translate(0px, 50px); }
+    to { transform: translate(0px, 0px); }
+}
+
+.pls-iphone-wrapper {
+    position: absolute;
+    left: 30px;
+    top: 97px;
+    width: 255px;
+    height: 455px;
+    overflow: hidden;
+    img.pls-iphone-status-bar {
+        position:relative;
+        top: -7px;
+        z-index: 2;
+    }
+    ul.pls-iphone-bg,
+    ul.pls-iphone-mob-inner {
+        position: relative;
+        top: -12px;
+        width: 1248px;
+        height: 652.5px;
+        right: 336px;
+        li {
+            float: left;
+            width: 257px;
+            height: 652.5px;
+            position: relative;
+            &.pls-iphone-bg-sidebar {
+                width: 168px;
+            }
+        }
+    }
+}
+
+.pls-slide-left {
+    @include translate(168px, 0px);
+    transition-duration: 1s;
+    -webkit-transition-duration: 1s;
+}
+
+.pls-switch {
+    @include translate(336px, 0px);
+}
+
+/* Media */
+
+@media screen and (max-width: 1150px) {
+    .pls-footer {
+        bottom: 25px;
+        img.logo {
+            display: none;
+        }
+        nav.pls-footer-nav {
+            float: left;
+            margin-left: 0px;
+            li.pls-footer-nav-home {
+                display: inline !important;
+            }
+        } 
+    }
+
+    .pls-slide {
+        width: 70%;
+        height: 400px;
+        position: relative;
+        left: 0px;
+        top: 10%;
+        ul {
+            width: 100%;
+            li {
+                width: 100%;
+                height: 400px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1050px) {
+
+    .pls-counter {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+    }
+
+    .mobile-logo {
+        display: block !important;
+    }
+
+    .pls-iphone,
+    .pls-iphone-mob {
+        background-size: 250px 517.85px;
+        width: 250px;
+        height: 517.85px;
+        right: 20px;
+    }
+
+    .pls-iphone-wrapper {
+        left: 24px;
+        top: 77px;
+        width: 204px;
+        height: 361px;
+        img.pls-iphone-status-bar {
+            top: -9px;
+            width: 205px;
+        }
+        ul.pls-iphone-bg,
+        ul.pls-iphone-mob-inner {
+            top: -15px;
+            width: 820px;
+            right: 268px;
+            li {
+                img {
+                    height: 351px;
+                }
+                width: 205px;
+                height: 351px;
+                &.pls-iphone-bg-sidebar {
+                    width: 134px;
+                }
+            }
+        }
+
+        .pls-slide-left {
+            @include translate(134px, 0px);
+            transition-duration: 1s;
+            -webkit-transition-duration: 1s;
+        }
+
+        .pls-switch {
+            @include translate(268px, 0px);
+        }
+    }
+
+}
+
+@media screen and  (max-width: 860px) {
+    .pls-slide {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 660px) {
+
+    .pls-slide {
+        width: 100%;
+    }
+
+    .pls-iphone {
+        display: none;
+    }
+
+    .mobile-logo {
+        float: left;
+    }
+
+    .pls-button-demo-app {
+        display: block !important;
+    }
+
+    .pls-counter {
+        display: none;
+    }
+
+    .pls-iphone-mob-overlay {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        display: block;
+        z-index: 100;
+
+        background: rgba(0,0,0,0.7);
+        
+        width: 100%;
+        height: 100%;
+
+        .pls-iphone-mob {
+            background: url("../images/iphone.png");
+            background-size: 250px;
+            background-repeat: no-repeat;
+            background-position: 50% 20px;
+            width: 100%;
+            height: 100%;
+            .pls-iphone-wrapper {
+                position: relative;
+                top: 98px;
+                margin: auto;
+                left: 0px;
+            }
+        }
+    }
+
+    body {
+        overflow: scroll;
+    }
+    
+    .pls-container {
+        overflow: hidden;
+        padding: 5%;
+    }
+
+}
