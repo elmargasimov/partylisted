@@ -25,7 +25,7 @@ define([
         setNameEmail: function(e) {
             e.preventDefault();
             /* If validation passed */
-            if (this.validateSignUp()) {
+            if (this.validateSignUp() !== false) {
                 this.model.set('fullname', this.fullname.val());
                 this.model.set('email', this.email.val());
                 /* Save data to Parse */

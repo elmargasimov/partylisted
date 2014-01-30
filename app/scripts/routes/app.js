@@ -4,8 +4,6 @@ define([
     'jquery',
     'backbone',
     '../views/app.js',
-    '../views/launch.js',
-    '../views/canvas.js',
     'parse'
 ], function($, Backbone, AppView, LaunchView, CanvasView) {
     'use strict';
