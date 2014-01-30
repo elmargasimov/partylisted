@@ -8,7 +8,7 @@ define([
 
     var UserModel = Parse.Object.extend("LaunchUsers", {
         defaults: {
-        	userame: "",
+        	username: "",
         	fullname: "",
         	email: ""
         }
